@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ScrollView style={style.container}>
+      {/* Header */}
+      <View style={style.header}>
+        <View>
+          <Text>Café do Código</Text>
+          <Text>Seu café, uma linha por vez</Text>
+        </View>
+        <View>
+         <Ionicons name='person' size={20} color="#2f2d2c"></Ionicons>
+        </View>
+
+      </View>
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f9f9f9'
   },
-});
+  header: {
+    width: '100%',
+    paddingHorizontal: 24,
+    paddingTop: 67,
+    paddingBottom: 20,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems: "center"
+  }
+})
