@@ -1,28 +1,32 @@
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, ScrollView, Image, Pressable, TextInput, TouchableOpacity,KeyboardAvoidingView } from 'react-native';
-
-
+import { useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, Image, TextInputComponent, TouchableOpacity, TextInputBase, TextInput, KeyboardAvoidingView, } from 'react-native';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import coffeeCard from './components/CoffeCard'; 
 
 export default function App() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleOrder = () => {
+    if (name.trim() === "") {
+      setMessage("Por favor, informe seu nome!");
+    } else {
+      setMessage(`Olá, ${name}! Seu pedido foi recebido.`)
+    }
+  };
+
   return (
-    <KeyboardAvoidingView 
-    style={styles.container}
-    behavior="padding"
-    keyboardVerticalOffset= {30}>
-      
-      <ScrollView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={30}>
+
+      <ScrollView>
         {/* Header */}
-        <View style={styles.header}>
+        <Header />
+        <Header />
 
-          <View>
-            <Text style={styles.headerTitle}>Café do código</Text>
-            <Text style={styles.headerSubtitle}>Seu café, uma linha por vez</Text>
-          </View>
-
-          <View style={styles.avatarPlaceholder}>
-            <Ionicons name="person" size={20} color="#2f2d2c"></Ionicons>
-          </View>
-        </View>
 
 
         <View style={styles.content}>
@@ -43,49 +47,59 @@ export default function App() {
 
 
           <View style={styles.menu}>
-            <View style={styles.miniFeatured}>
-              <Text style={styles.CardTitle}>Espresso</Text>
-              <Text style={styles.CardDescription}>Puro e forte</Text>
-              <Text style={styles.CardPrice}>R$ 7,00</Text>
-            </View>
+            <coffeeCard
+            name="Espresso"
+             description="Puro e forte"
+              price="R$ 7,00"
+              />
 
-            <View style={styles.miniFeatured}>
-              <Text style={styles.CardTitle}>Cappuccino</Text>
-              <Text style={styles.CardDescription}>Clássico com espuma</Text>
-              <Text style={styles.CardPrice}>R$ 12,90</Text>
-            </View>
+              <CoffeeCard 
+            name="Cappucino"
+             description="Puro e forte"
+              price="R$ 12,90"
+              />
 
-            <View style={styles.miniFeatured}>
-              <Text style={styles.CardTitle}>Latte</Text>
-              <Text style={styles.CardDescription}>Leite cremoso</Text>
-              <Text style={styles.CardPrice}>R$ 11,50</Text>
-            </View>
+              <CoffeeCard 
+            name="Latte"
+             description="Puro e forte"
+              price="R$ 11,50"
+              />
 
-            <View style={styles.miniFeatured}>
-              <Text style={styles.CardTitle}>Mocha</Text>
-              <Text style={styles.CardDescription}>Toque de chocolate</Text>
-              <Text style={styles.CardPrice}>R$ 13,50</Text>
-            </View>
+               <CoffeeCard 
+            name="Mocha"
+             description="Puro e forte"
+              price="R$ 13,50"
+              />
+
+
+
+
           </View>
-        </View>
+            <View style={styles.orderSection}>
+              <Text style={styles.question}>Qual é o seu nome?</Text>
 
+              <TextInput style={styles.input}
+                placeholder="Digite seu nome"
+                value={name}
+                onChangeText={setName}
+              ></TextInput>
 
-        <View style={styles.orderSection}>
-          <Text style={styles.question}> Qual o seu nome ?</Text>
+              <TouchableOpacity style={styles.button} onPress={handleOrder}>
+                <Text style={styles.buttonText}>Fazer meu pedido</Text>
+              </TouchableOpacity>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Digite seu Nome">
-          </TextInput>
+              {message !== '' && (
+                <Text style={styles.messageText}>{message}</Text>
+              )}
+            </View>
+            </View>
 
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Fazer meu pedido</Text>
-          </TouchableOpacity>
+          
 
-          <Pressable>
+          {/*footer */}
+          <Footer />
+          {/*footer */}
 
-          </Pressable>
-        </View>
 
 
       </ScrollView>
@@ -99,36 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9F9F9'
   },
 
-  header: {
-    width: '100%',
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
 
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: '800',
-    color: "#2f2d2c"
-  },
-
-  headerSubtitle: {
-    fontSize: 14,
-    color: "#9b9b9b",
-    marginTop: 4
-  },
-
-  avatarPlaceholder: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "#f0f0f0",
-    justifyContent: "center",
-    alignItems: "center"
-  },
 
   content: {
     paddingHorizontal: 24
@@ -195,34 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 16
   },
 
-  miniFeatured: {
-    backgroundColor: "#ffffff",
-    padding: 16,
-    borderRadius: 16,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
-    elevation: 3,
-    width: "48%",
-    marginBottom: 16,
-  },
-
-  CardTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  CardDescription: {
-    fontSize: 12,
-    marginTop: 4
-  },
-
-  CardPrice: {
-    fontSize: 16,
-    fontWeight: "800",
-    marginTop: 12,
-    color: "#c67c4e"
-  },
 
   menu: {
     flexDirection: "row",
@@ -230,6 +187,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 32
   },
+
   orderSection: {
     backgroundColor: "#ffffff",
     padding: 24,
@@ -240,12 +198,14 @@ const styles = StyleSheet.create({
     elevation: 4,
     marginTop: 10
   },
+
   question: {
     fontSize: 18,
     fontWeight: "800",
     color: "#2f2d2c",
     marginBottom: 16
   },
+
   input: {
     width: "100%",
     height: 56,
@@ -254,6 +214,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 16,
   },
+
   button: {
     width: "100%",
     backgroundColor: "#c67c4e",
@@ -267,14 +228,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 10,
     elevation: 4
-
   },
+
   buttonText: {
     fontSize: 16,
     fontWeight: "700",
     color: "#ffffff",
+  },
 
-  }
-
-
+  messageText: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#c67c4e",
+    textAlign: "center",
+    marginTop: 20,
+  },
 });
