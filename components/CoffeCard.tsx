@@ -1,19 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 
 type coffeeCardProps = {
-    name: string;
-    description: string;
-    price: string;
+  name: string;
+  description: string;
+  price: string;
 };
 
 export default function coffeeCard({ name, description, price }: coffeeCardProps) {
-    return (
-        <View style={styles.miniFeatured}>
-            <Text style={styles.produtoTitle}>{name}</Text>
-            <Text style={styles.produtoDescription}>{description}</Text>
-            <Text style={styles.produtoPrice}>{price}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.miniFeatured}>
+      <Text style={styles.produtoTitle}>{name}</Text>
+      <Text style={styles.produtoDescription}>{description}</Text>
+      <Text style={styles.produtoPrice}>{price}</Text>
+    </View>
+
+  );
 }
 
 const styles = StyleSheet.create({

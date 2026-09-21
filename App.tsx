@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, TextInputComponent, TouchableOpacity, TextInputBase, TextInput, KeyboardAvoidingView, } from 'react-native';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import coffeeCard from './components/CoffeCard'; 
+import CoffeCard from './components/CoffeCard';
+import CustomButton from './components/CustomButton';
 
 export default function App() {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ export default function App() {
       <ScrollView>
         {/* Header */}
         <Header />
-        <Header />
+        
 
 
 
@@ -47,58 +48,58 @@ export default function App() {
 
 
           <View style={styles.menu}>
-            <coffeeCard
-            name="Espresso"
-             description="Puro e forte"
+            <CoffeCard
+              name="Espresso"
+              description="Puro e forte"
               price="R$ 7,00"
-              />
+            />
 
-              <CoffeeCard 
-            name="Cappucino"
-             description="Puro e forte"
+            <CoffeCard
+              name="Cappucino"
+              description="Cremoso"
               price="R$ 12,90"
-              />
+            />
 
-              <CoffeeCard 
-            name="Latte"
-             description="Puro e forte"
+            <CoffeCard
+              name="Latte"
+              description="Muito gostoso"
               price="R$ 11,50"
-              />
+            />
 
-               <CoffeeCard 
-            name="Mocha"
-             description="Puro e forte"
+            <CoffeCard
+              name="Mocha"
+              description="Delicioso"
               price="R$ 13,50"
-              />
+            />
 
 
 
 
           </View>
-            <View style={styles.orderSection}>
-              <Text style={styles.question}>Qual é o seu nome?</Text>
+          <View style={styles.orderSection}>
+            <Text style={styles.question}>Qual é o seu nome?</Text>
 
-              <TextInput style={styles.input}
-                placeholder="Digite seu nome"
-                value={name}
-                onChangeText={setName}
-              ></TextInput>
+            <TextInput style={styles.input}
+              placeholder="Digite seu nome"
+              value={name}
+              onChangeText={setName}
+            ></TextInput>
 
-              <TouchableOpacity style={styles.button} onPress={handleOrder}>
-                <Text style={styles.buttonText}>Fazer meu pedido</Text>
-              </TouchableOpacity>
+            <CustomButton title="Fazer meu pedido" onPress={handleOrder} />
 
-              {message !== '' && (
-                <Text style={styles.messageText}>{message}</Text>
-              )}
-            </View>
-            </View>
+           
 
-          
+            {message !== '' && (
+              <Text style={styles.messageText}>{message}</Text>
+            )}
+          </View>
+        </View>
 
-          {/*footer */}
-          <Footer />
-          {/*footer */}
+
+
+        {/*footer */}
+        <Footer />
+        {/*footer */}
 
 
 
@@ -215,27 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  button: {
-    width: "100%",
-    backgroundColor: "#c67c4e",
-    borderRadius: 30,
-    paddingVertical: 16,
-    paddingHorizontal: 30,
-    alignItems: "center",
-    marginTop: 20,
-    shadowColor: "#c67c4e",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 4
-  },
-
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#ffffff",
-  },
-
+ 
   messageText: {
     fontSize: 16,
     fontWeight: "800",
